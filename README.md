@@ -44,3 +44,9 @@ Tests are great and we should run them.  Here's how:
 ```sh
 bundle exec rake best_type:ci
 ```
+
+### Building the Gem and Pushing to RubyGems (for developers):
+
+```sh
+bundle exec rake release
+```
