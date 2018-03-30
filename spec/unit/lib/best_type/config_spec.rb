@@ -15,12 +15,11 @@ describe BestType::Config do
 
   context '#initialize' do
     it "creates a new Config instance with the base configuration from internal_config_options.yml file and any provided user config values merged in" do
-      expect(config.extension_to_mime_type_overrides).to eq({
+      expect(config.extension_to_mime_type_overrides).to include({
         'test' => 'test/type',
-        'mp4' => 'video/mp4',
         'custom' => 'custom/type'
       })
-      expect(config.mime_type_to_dc_type_overrides).to eq({
+      expect(config.mime_type_to_dc_type_overrides).to include({
         'test/type' => 'Test',
         'custom/type' => 'Custom'
       })
@@ -30,15 +29,13 @@ describe BestType::Config do
   context "private methods" do
     context '#add_extension_to_mime_type_overrides' do
       it do
-        expect(config.extension_to_mime_type_overrides).to eq({
+        expect(config.extension_to_mime_type_overrides).to include({
           'test' => 'test/type',
-          'mp4' => 'video/mp4',
           'custom' => 'custom/type'
         })
         config.send(:add_extension_to_mime_type_overrides, {'zzz' => 'zzz/type'})
-        expect(config.extension_to_mime_type_overrides).to eq({
+        expect(config.extension_to_mime_type_overrides).to include({
           'test' => 'test/type',
-          'mp4' => 'video/mp4',
           'custom' => 'custom/type',
           'zzz' => 'zzz/type'
         })
@@ -47,12 +44,12 @@ describe BestType::Config do
 
     context '#add_mime_type_to_dc_type_overrides' do
       it do
-        expect(config.mime_type_to_dc_type_overrides).to eq({
+        expect(config.mime_type_to_dc_type_overrides).to include({
           'test/type' => 'Test',
           'custom/type' => 'Custom',
         })
         config.send(:add_mime_type_to_dc_type_overrides, {'zzz/type' => 'Zzz'})
-        expect(config.mime_type_to_dc_type_overrides).to eq({
+        expect(config.mime_type_to_dc_type_overrides).to include({
           'test/type' => 'Test',
           'custom/type' => 'Custom',
           'zzz/type' => 'Zzz'

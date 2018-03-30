@@ -38,12 +38,11 @@ describe BestType do
       described_class.configure({}) # don't let this configuration affect other tests outside of this context
     }
     it "returns a new Config instance with the base configuration from internal_config_options.yml file and any provided user config values merged in" do
-      expect(described_class.config.extension_to_mime_type_overrides).to eq({
+      expect(described_class.config.extension_to_mime_type_overrides).to include({
         'test' => 'test/type',
-        'mp4' => 'video/mp4',
         'custom' => 'custom/type'
       })
-      expect(described_class.config.mime_type_to_dc_type_overrides).to eq({
+      expect(described_class.config.mime_type_to_dc_type_overrides).to include({
         'test/type' => 'Test',
         'custom/type' => 'Custom'
       })
