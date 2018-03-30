@@ -1,0 +1,17 @@
+.bundle/
+log/*.log
+pkg/
+Gemfile.lock
+
+# simplecov coverage report
+/coverage
+
+# Ignore editor files
+*~
+\#*\#
+
+# Ignore OpenOffice lock file
+.~lock*
+
+# Ignore OS-specific
+.DS_Store
