@@ -3,6 +3,8 @@ module BestType
 
     attr_reader :config
 
+    FALLBACK_DC_TYPE = 'Software'.freeze
+
     def initialize(mime_type_lookup_instance)
       @mime_type_lookup = mime_type_lookup_instance
       @config = @mime_type_lookup.config
@@ -28,7 +30,7 @@ module BestType
       }
 
       dc_type = mimes_to_dc.find { |pattern, _type_val| mime_type =~ pattern }
-      dc_type.last
+      dc_type.nil? ? FALLBACK_DC_TYPE : dc_type.last
     end
 
   end

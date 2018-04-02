@@ -55,6 +55,10 @@ describe BestType::DcTypeLookup do
       end
     end
 
+    it "falls back to FALLBACK_DC_TYPE when given mime type is not real, and cannot be resolved to any internal or custom mapping" do
+      expect(dc_type_lookup.for_mime_type('definitelynotreal/veryfake')).to eq(BestType::DcTypeLookup::FALLBACK_DC_TYPE)
+    end
+
     it "can identify custom file extensions from the gem's internal_custom_mapping.yml file" do
       expect(dc_type_lookup.for_mime_type('test/type')).to eq('Test')
     end
