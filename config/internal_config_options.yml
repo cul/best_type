@@ -4,3 +4,5 @@ extension_to_mime_type_overrides:
 mime_type_to_dc_type_overrides:
   'test/type': 'Test'
   'application/mxf': 'MovingImage'
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'Text'
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'Dataset'
