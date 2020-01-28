@@ -2,6 +2,7 @@ require 'best_type/version'
 require 'best_type/config'
 require 'best_type/mime_type_lookup'
 require 'best_type/dc_type_lookup'
+require 'best_type/pcdm_type_lookup'
 require 'yaml'
 
 module BestType
@@ -13,6 +14,10 @@ module BestType
 
   def self.dc_type
     @dc_type ||= BestType::DcTypeLookup.new(mime_type)
+  end
+
+  def self.pcdm_type
+    @pcdm_type ||= BestType::PcdmTypeLookup.new(mime_type)
   end
 
   def self.config(reload = false, user_config_options = {})

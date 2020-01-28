@@ -17,6 +17,12 @@ describe BestType do
     end
   end
 
+  context ".pcdm_type" do
+    it "returns a new PcdmTypeLookup instance" do
+      expect(described_class.pcdm_type).to be_a(BestType::PcdmTypeLookup)
+    end
+  end
+
   context ".config" do
     it "returns a new Config instance" do
       expect(described_class.config).to be_a(BestType::Config)

@@ -2,7 +2,7 @@
 log/*.log
 pkg/
 Gemfile.lock
-
+tmp/*
 # simplecov coverage report
 /coverage
 
