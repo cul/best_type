@@ -6,3 +6,5 @@ mime_type_to_dc_type_overrides:
   'application/mxf': 'MovingImage'
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'Text'
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'Dataset'
+mime_type_to_pcdm_type_overrides:
+  'test/type': 'Test'

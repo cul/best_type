@@ -28,6 +28,12 @@ BestType.dc_type.for_file_name('/path/to/some/file.jpg') # 'StillImage'
 
 # detect dc type for mime types
 BestType.dc_type.for_mime_type('image/jpeg') # 'StillImage'
+
+# detect dc type for file names (including full file path)
+BestType.pcdm_type.for_file_name('/path/to/some/file.jpg') # 'Image'
+
+# detect dc type for mime types
+BestType.pcdm_type.for_mime_type('image/jpeg') # 'Image'
 ```
 
 ### Add Custom Overrides
@@ -36,12 +42,14 @@ BestType.configure({
   extension_to_mime_type_overrides:
     'custom': 'custom/type'
   mime_type_to_dc_type_overrides:
-    'custom/type': 'Custom'
+    'custom/type': 'CustomDC'
+  mime_type_to_pcdm_type_overrides:
+    'custom/type': 'CustomPCDM'
 })
 
 BestType.mime_type.for_file_name('myfile.custom') # 'custom/type'
-BestType.dc_type.for_file_name('myfile.custom') # 'Custom'
-BestType.dc_type.for_mime_type('custom/type') # 'Custom'
+BestType.dc_type.for_file_name('myfile.custom') # 'CustomDC'
+BestType.pcdm_type.for_mime_type('custom/type') # 'CustomPCDM'
 
 ```
 
@@ -63,6 +71,8 @@ BestType.configure({
     'custom': 'custom/type'
   mime_type_to_dc_type_overrides:
     'custom/type': 'Custom'
+  mime_type_to_pcdm_type_overrides:
+    'custom/type': 'Custom'
 })
 ```
 
@@ -81,18 +91,24 @@ development:
     'good': 'good/type'
   mime_type_to_dc_type_overrides:
     'good/type': 'Good'
+  mime_type_to_pcdm_type_overrides:
+    'good/type': 'Goodly'
     
 test:
   extension_to_mime_type_overrides:
     'better': 'better/type'
   mime_type_to_dc_type_overrides:
     'better/type': 'Better'
+  mime_type_to_pcdm_type_overrides:
+    'best/type': 'Betterly'
 
 production:
   extension_to_mime_type_overrides:
     'best': 'best/type'
   mime_type_to_dc_type_overrides:
     'best/type': 'Best'
+  mime_type_to_pcdm_type_overrides:
+    'best/type': 'Bestly'
 ```
 
 ### Running Tests (for developers):
