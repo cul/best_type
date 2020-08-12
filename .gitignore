@@ -6,6 +6,9 @@ tmp/*
 # simplecov coverage report
 /coverage
 
+# Ignore gem builds
+*.gem
+
 # Ignore editor files
 *~
 \#*\#

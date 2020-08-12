@@ -10,6 +10,7 @@ application/vnd.openxmlformats-officedocument.presentationml.presentation,Presen
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,Spreadsheet
 application/vnd.sun.xml.impress,Presentation
 image/tiff,Image
+video/mp4,Video
 application/mp4,Video
 application/octet-stream,Unknown
 application/rtf,PageDescription
@@ -51,3 +52,4 @@ application/vnd.ms-word.document.macroEnabled.12,PageDescription
 text/css,SourceCode
 video/DV,Video
 application/mxf,Video
+video/x-m4v,Video
