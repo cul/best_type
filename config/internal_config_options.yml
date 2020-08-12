@@ -1,7 +1,8 @@
 extension_to_mime_type_overrides:
   'test': 'test/type'
   'mp4': 'video/mp4'
-  'm4a': 'video/x-m4v'
+  'vtt': 'text/vtt'
+  'm4v': 'video/x-m4v'
 mime_type_to_dc_type_overrides:
   'test/type': 'Test'
   'application/mxf': 'MovingImage'
