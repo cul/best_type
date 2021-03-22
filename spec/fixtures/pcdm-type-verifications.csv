@@ -53,3 +53,6 @@ text/css,SourceCode
 video/DV,Video
 application/mxf,Video
 text/vtt,Text
+application/x-iwork-keynote-sffkey,Presentation
+application/x-iwork-numbers-sffnumbers,Spreadsheet
+application/x-iwork-pages-sffpages,PageDescription
