@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/cul/best_type'
   s.license     = 'MIT'
 
-  s.add_dependency("mime-types", "~> 3.0")
+  s.add_dependency("mime-types", "~> 3.4")
 
   s.add_development_dependency("rake", ">= 10.1")
   s.add_development_dependency("rspec", "~>3.7")
