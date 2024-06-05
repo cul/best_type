@@ -36,6 +36,7 @@ module BestType
       hsh.transform_keys(&:downcase)
     end
 
+    # Returns a new Hash with downcased keys and values
     def downcase_hash_keys_and_values(hsh)
       hsh.map { |k, v| [k.downcase, v.downcase] }.to_h
     end
