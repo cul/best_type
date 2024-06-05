@@ -12,6 +12,9 @@ module BestType
     end
 
     def for_file_name(file_name_or_path)
+      # Normalize format of file_name_or_path
+      file_name_or_path = file_name_or_path.downcase
+
       extension = File.extname(file_name_or_path)
       extension = extension[1..-1] unless extension.empty?
 

@@ -1,3 +1,5 @@
+# NOTE: Always use lower case keys in the hashes below.
+
 extension_to_mime_type_overrides:
   'test': 'test/type'
   'mp4': 'video/mp4'

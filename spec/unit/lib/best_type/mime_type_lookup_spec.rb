@@ -44,10 +44,16 @@ describe BestType::MimeTypeLookup do
       expect(mime_type_lookup.for_file_name('myfile.test')).to eq('test/type')
     end
 
-    context "can identify custom file extensions passed in via configuration" do
-      it do
-        expect(mime_type_lookup.for_file_name('myfile.custom')).to eq('custom/type')
-      end
+    it "can identify CAPITALIZED file extensions from the gem's internal_custom_mapping.yml file" do
+      expect(mime_type_lookup.for_file_name('MYFILE.TEST')).to eq('test/type')
+    end
+
+    it "can identify custom file extensions passed in via configuration" do
+      expect(mime_type_lookup.for_file_name('myfile.custom')).to eq('custom/type')
+    end
+
+    it "can identify CAPITALIZED custom file extensions passed in via configuration" do
+      expect(mime_type_lookup.for_file_name('MYFILE.CUSTOM')).to eq('custom/type')
     end
   end
 

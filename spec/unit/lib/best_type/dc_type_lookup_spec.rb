@@ -36,6 +36,12 @@ describe BestType::DcTypeLookup do
       expect(dc_type_lookup.instance_variable_get(:@mime_type_lookup)).to receive(:for_file_name).with(file_name).and_call_original
       dc_type_lookup.for_file_name(file_name)
     end
+
+    ['file.jpg', 'file.Jpg', 'file.JPG'].each do |variant|
+      it "works as expected for any capitalization variation of the file extension: #{variant}" do
+        expect(dc_type_lookup.for_file_name(variant)).to eq('StillImage')
+      end
+    end
   end
 
   context '#for_mime_type' do
@@ -45,6 +51,8 @@ describe BestType::DcTypeLookup do
           'text/plain' => 'Text',
           'text/html' => 'Text',
           'image/jpeg' => 'StillImage',
+          'Image/Jpeg' => 'StillImage',
+          'IMAGE/JPEG' => 'StillImage',
           'application/octet-stream' => 'Software'
         }
       }
@@ -63,10 +71,16 @@ describe BestType::DcTypeLookup do
       expect(dc_type_lookup.for_mime_type('test/type')).to eq('Test')
     end
 
-    context "can identify custom file extensions passed in via configuration" do
-      it do
-        expect(dc_type_lookup.for_mime_type('custom/type')).to eq('Custom')
-      end
+    it "can identify CAPITALIZED versions of custom file extensions from the gem's internal_custom_mapping.yml file" do
+      expect(dc_type_lookup.for_mime_type('TEST/TYPE')).to eq('Test')
+    end
+
+    it "can identify custom file extensions passed in via configuration" do
+      expect(dc_type_lookup.for_mime_type('custom/type')).to eq('Custom')
+    end
+
+    it "can identify CAPITALIZED custom file extensions passed in via configuration" do
+      expect(dc_type_lookup.for_mime_type('CUSTOM/TYPE')).to eq('Custom')
     end
   end
 

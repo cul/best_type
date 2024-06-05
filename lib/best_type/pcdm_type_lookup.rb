@@ -46,10 +46,16 @@ module BestType
     end
 
     def for_file_name(file_name_or_path)
+      # Normalize format of file_name_or_path
+      file_name_or_path = file_name_or_path.downcase
+
       for_mime_type(@mime_type_lookup.for_file_name(file_name_or_path))
     end
 
     def for_mime_type(mime_type)
+      # Normalize format of mime_type
+      mime_type = mime_type.downcase
+
       # Check config overrides first
       file_type = @config.mime_type_to_pcdm_type_overrides.fetch(mime_type, nil)
       return file_type unless file_type.nil?

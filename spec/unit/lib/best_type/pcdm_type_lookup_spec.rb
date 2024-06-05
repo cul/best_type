@@ -58,10 +58,16 @@ describe BestType::PcdmTypeLookup do
       expect(pcdm_type_lookup.for_mime_type('test/type')).to eq('Test')
     end
 
-    context "can identify custom file extensions passed in via configuration" do
-      it do
-        expect(pcdm_type_lookup.for_mime_type('custom/type')).to eq('Custom')
-      end
+    it "can identify CAPITALIZED custom file extensions from the gem's internal_custom_mapping.yml file" do
+      expect(pcdm_type_lookup.for_mime_type('TEST/TYPE')).to eq('Test')
+    end
+
+    it "can identify custom file extensions passed in via configuration" do
+      expect(pcdm_type_lookup.for_mime_type('custom/type')).to eq('Custom')
+    end
+
+    it "can identify custom file extensions passed in via configuration" do
+      expect(pcdm_type_lookup.for_mime_type('CUSTOM/TYPE')).to eq('Custom')
     end
   end
 
