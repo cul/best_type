@@ -52,9 +52,7 @@ BestType.dc_type.for_file_name('myfile.custom') # 'CustomDC'
 BestType.pcdm_type.for_mime_type('custom/type') # 'CustomPCDM'
 ```
 
-**Note 1: For extension_to_mime_type_overrides overrides, keys and values should be lower case because file extension and mime type values are converted to lower case before they are checked.  If you supply capitalized keys or values for extension_to_mime_type_overrides, they will be automatically converted to lower case.**
-
-**Note 2: For mime_type_to_dc_type_overrides or mime_type_to_pcdm_type_overrides overrides, keys should be lower case because mime type values are converted to lower case before they are checked.  If you supply capitalized keys for mime_type_to_dc_type_overrides or mime_type_to_pcdm_type_overrides, they will be automatically converted to lower case.**
+**Note: Case-insensitive string comparisons are used when checking against file extensions and mime types.**
 
 ### Recommended Setup For Rails
 

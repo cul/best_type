@@ -6,7 +6,7 @@ describe BestType::Config do
     BestType::Config.new(
       extension_to_mime_type_overrides: {
         'custom' => 'custom/type',
-        'OTHER' => 'other/type',
+        'OTHER' => 'Other/Type',
       },
       mime_type_to_dc_type_overrides: {
         'custom/type' => 'Custom',
@@ -21,11 +21,11 @@ describe BestType::Config do
 
   context '#initialize' do
     it  'creates a new Config instance with the base configuration from internal_config_options.yml '\
-        'file, merges in user config values, and downcases overrides as expected' do
+        'file, merges in user config values, and downcases override keys as expected (but not override values)' do
       expect(config.extension_to_mime_type_overrides).to include({
         'test' => 'test/type',
         'custom' => 'custom/type',
-        'other' => 'other/type', # NOTE: They key and value here have been downcased
+        'other' => 'Other/Type', # NOTE: They key here has been downcased
       })
       expect(config.mime_type_to_dc_type_overrides).to include({
         'test/type' => 'Test',
@@ -41,22 +41,6 @@ describe BestType::Config do
   end
 
   context "private methods" do
-    context '#downcase_hash_keys' do
-      it 'works as expected' do
-        expect(config.send(:downcase_hash_keys, {'A' => 'A/A', 'b' => 'b/b'})).to eq(
-          'a' => 'A/A', 'b' => 'b/b'
-        )
-      end
-    end
-
-    context '#downcase_hash_keys_and_values' do
-      it 'works as expected' do
-        expect(config.send(:downcase_hash_keys_and_values, {'A' => 'A/A', 'b' => 'b/b'})).to eq(
-          'a' => 'a/a', 'b' => 'b/b'
-        )
-      end
-    end
-
     context '#add_extension_to_mime_type_overrides' do
       it do
         expect(config.extension_to_mime_type_overrides).to include({

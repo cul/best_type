@@ -36,13 +36,8 @@ module BestType
       hsh.transform_keys(&:downcase)
     end
 
-    # Returns a new Hash with downcased keys and values
-    def downcase_hash_keys_and_values(hsh)
-      hsh.map { |k, v| [k.downcase, v.downcase] }.to_h
-    end
-
     def add_extension_to_mime_type_overrides(overrides)
-      @extension_to_mime_type_overrides.merge!(downcase_hash_keys_and_values(overrides))
+      @extension_to_mime_type_overrides.merge!(downcase_hash_keys(overrides))
     end
 
     def add_mime_type_to_dc_type_overrides(overrides)
