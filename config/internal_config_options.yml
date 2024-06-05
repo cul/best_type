@@ -5,6 +5,7 @@ extension_to_mime_type_overrides:
   'vtt': 'text/vtt'
   'm4v': 'video/x-m4v'
   'mts': 'video/MP2T'
+  'ac3': 'audio/ac3'
 mime_type_to_dc_type_overrides:
   # NOTE: Always use lower case keys
   'test/type': 'Test'
