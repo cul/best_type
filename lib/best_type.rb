@@ -20,7 +20,7 @@ module BestType
     @pcdm_type ||= BestType::PcdmTypeLookup.new(mime_type)
   end
 
-  def self.config(reload = false, user_config_options = {})
+  def self.config(reload: false, user_config_options: {})
     if @config.nil? || reload
       @semaphore.synchronize do
         @config = BestType::Config.new(user_config_options)
@@ -32,7 +32,7 @@ module BestType
   end
 
   def self.configure(opts = {})
-    config(true, opts)
+    config(reload: true, user_config_options: opts)
   end
 
 end

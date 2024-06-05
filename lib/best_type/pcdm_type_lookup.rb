@@ -112,9 +112,8 @@ module BestType
 
       file_type = mimes_to_type.detect { |pattern, _type_val| mime_type =~ pattern }
       return fallback_type unless file_type
-      if file_type&.last.is_a? Hash
-        file_type = file_type.last.detect { |pattern, _type_val| mime_type =~ pattern }
-      end
+
+      file_type = file_type.last.detect { |pattern, _type_val| mime_type =~ pattern } if file_type&.last.is_a? Hash
       file_type.nil? ? fallback_type : file_type.last
     end
 

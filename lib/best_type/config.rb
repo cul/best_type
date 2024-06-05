@@ -23,11 +23,11 @@ module BestType
 
     # Returns a new Hash with downcased keys
     def downcase_hash_keys(hsh)
-      hsh.map{|k, v| [k.downcase, v]}.to_h
+      hsh.map { |k, v| [k.downcase, v] }.to_h
     end
 
     def downcase_hash_keys_and_values(hsh)
-      hsh.map{|k, v| [k.downcase, v.downcase]}.to_h
+      hsh.map { |k, v| [k.downcase, v.downcase] }.to_h
     end
 
     def add_extension_to_mime_type_overrides(overrides)
