@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'best_type/version'
 require 'best_type/config'
 require 'best_type/mime_type_lookup'
@@ -34,5 +36,4 @@ module BestType
   def self.configure(opts = {})
     config(reload: true, user_config_options: opts)
   end
-
 end

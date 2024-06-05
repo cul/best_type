@@ -1,28 +1,33 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/MethodLength
+
 module BestType
   class PcdmTypeLookup
-
     attr_reader :config
 
     # https://github.com/duraspace/pcdm/blob/master/pcdm-ext/file-format-types.rdf
-    ARCHIVE = "Archive".freeze
-    AUDIO = "Audio".freeze
-    DATABASE = "Database".freeze
-    DATASET = "Dataset".freeze
-    EMAIL = "Email".freeze
-    FONT = "Font".freeze
-    HTML = "HTML".freeze
-    IMAGE = "Image".freeze
-    PAGE_DESCRIPTION = "PageDescription".freeze
-    PRESENTATION = "Presentation".freeze
-    SOFTWARE = "Software".freeze
-    SOURCE_CODE = "SourceCode".freeze
-    SPREADSHEET = "Spreadsheet".freeze
-    STRUCTURED_TEXT = "StructuredText".freeze
-    TEXT = "Text".freeze
-    UNKNOWN = "Unknown".freeze
-    UNSTRUCTURED_TEXT = "UnstructuredText".freeze
-    VIDEO = "Video".freeze
-    WEBSITE = "Website".freeze
+    ARCHIVE = 'Archive'
+    AUDIO = 'Audio'
+    DATABASE = 'Database'
+    DATASET = 'Dataset'
+    EMAIL = 'Email'
+    FONT = 'Font'
+    HTML = 'HTML'
+    IMAGE = 'Image'
+    PAGE_DESCRIPTION = 'PageDescription'
+    PRESENTATION = 'Presentation'
+    SOFTWARE = 'Software'
+    SOURCE_CODE = 'SourceCode'
+    SPREADSHEET = 'Spreadsheet'
+    STRUCTURED_TEXT = 'StructuredText'
+    TEXT = 'Text'
+    UNKNOWN = 'Unknown'
+    UNSTRUCTURED_TEXT = 'UnstructuredText'
+    VIDEO = 'Video'
+    WEBSITE = 'Website'
 
     # these include values that will not be derived from MIME/content types
     VALID_TYPES = [
@@ -65,47 +70,47 @@ module BestType
         /^video/i => VIDEO,
         /^audio/i => AUDIO,
         /^text/i => {
-          /\/css/i => SOURCE_CODE,
-          /\/html/i => HTML,
+          %r{/css}i => SOURCE_CODE,
+          %r{/html}i => HTML,
           /.+/ => TEXT
         },
         /excel|spreadsheet|xls/i => SPREADSHEET,
-        /application\/sql/i => DATABASE,
+        %r{application/sql}i => DATABASE,
         /csv/i => DATASET,
         /octet.stream/i => UNKNOWN,
         /^application/i => {
-          /\/access/i => DATABASE,
-          /\/css/i => SOURCE_CODE,
-          /\/html/i => HTML,
-          /\/x-iwork-keynote/i => PRESENTATION,
-          /\/x-iwork-numbers/i => SPREADSHEET,
-          /\/x-iwork-pages/i => PAGE_DESCRIPTION,
-          /\/mbox/i => EMAIL,
-          /\/mp4/i => VIDEO,
-          /\/mp4a/i => AUDIO,
-          /\/msaccess/i => DATABASE,
-          /\/mxf/i => VIDEO,
-          /\/(pdf|msword)/i => PAGE_DESCRIPTION,
-          /\/postscript/i => PAGE_DESCRIPTION,
-          /\/powerpoint/i => PRESENTATION,
-          /\/rtf/i => PAGE_DESCRIPTION,
-          /\/sql/i => DATABASE,
-          /\/swf/ => VIDEO,
-          /\/vnd.ms-asf/i => VIDEO,
-          /\/vnd.ms-word/i => PAGE_DESCRIPTION,
-          /\/vnd.ms-wpl/i => PAGE_DESCRIPTION,
-          /\/vnd.oasis.opendocument.text/i => PAGE_DESCRIPTION,
-          /\/vnd.openxmlformats-officedocument.presentation/i => PRESENTATION,
-          /\/vnd.openxmlformats-officedocument.wordprocessingml/i => PAGE_DESCRIPTION,
-          /\/vnd.ms-powerpoint/i => PRESENTATION,
-          /\/vnd.sun.xml.calc/i => SPREADSHEET,
-          /\/vnd.sun.xml.impress/i => PRESENTATION,
-          /\/vnd.sun.xml.writer/i => PAGE_DESCRIPTION,
-          /\/xml/i => STRUCTURED_TEXT,
-          /\/x.mspublisher/i => PAGE_DESCRIPTION,
-          /\/x.shockwave-flash/ => VIDEO,
-          /\/x.spss/i => DATASET,
-          /\/zip/i => ARCHIVE,
+          %r{/access}i => DATABASE,
+          %r{/css}i => SOURCE_CODE,
+          %r{/html}i => HTML,
+          %r{/x-iwork-keynote}i => PRESENTATION,
+          %r{/x-iwork-numbers}i => SPREADSHEET,
+          %r{/x-iwork-pages}i => PAGE_DESCRIPTION,
+          %r{/mbox}i => EMAIL,
+          %r{/mp4}i => VIDEO,
+          %r{/mp4a}i => AUDIO,
+          %r{/msaccess}i => DATABASE,
+          %r{/mxf}i => VIDEO,
+          %r{/(pdf|msword)}i => PAGE_DESCRIPTION,
+          %r{/postscript}i => PAGE_DESCRIPTION,
+          %r{/powerpoint}i => PRESENTATION,
+          %r{/rtf}i => PAGE_DESCRIPTION,
+          %r{/sql}i => DATABASE,
+          %r{/swf} => VIDEO,
+          %r{/vnd.ms-asf}i => VIDEO,
+          %r{/vnd.ms-word}i => PAGE_DESCRIPTION,
+          %r{/vnd.ms-wpl}i => PAGE_DESCRIPTION,
+          %r{/vnd.oasis.opendocument.text}i => PAGE_DESCRIPTION,
+          %r{/vnd.openxmlformats-officedocument.presentation}i => PRESENTATION,
+          %r{/vnd.openxmlformats-officedocument.wordprocessingml}i => PAGE_DESCRIPTION,
+          %r{/vnd.ms-powerpoint}i => PRESENTATION,
+          %r{/vnd.sun.xml.calc}i => SPREADSHEET,
+          %r{/vnd.sun.xml.impress}i => PRESENTATION,
+          %r{/vnd.sun.xml.writer}i => PAGE_DESCRIPTION,
+          %r{/xml}i => STRUCTURED_TEXT,
+          %r{/x.mspublisher}i => PAGE_DESCRIPTION,
+          %r{/x.shockwave-flash} => VIDEO,
+          %r{/x.spss}i => DATASET,
+          %r{/zip}i => ARCHIVE,
           /.+/ => UNKNOWN
         }
       }
@@ -116,6 +121,5 @@ module BestType
       file_type = file_type.last.detect { |pattern, _type_val| mime_type =~ pattern } if file_type&.last.is_a? Hash
       file_type.nil? ? fallback_type : file_type.last
     end
-
   end
 end

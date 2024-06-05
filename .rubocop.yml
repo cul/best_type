@@ -14,3 +14,6 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
     - 'lib/tasks/**/*'
+
+Lint/MissingCopEnableDirective:
+  Enabled: false
