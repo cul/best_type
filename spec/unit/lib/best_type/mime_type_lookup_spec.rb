@@ -31,6 +31,7 @@ describe BestType::MimeTypeLookup do
           'something.tar.gz' => 'application/gzip',
           'why.did.i.name.this.file.like.this.jpg' => 'image/jpeg',
           '.htaccess' => 'application/octet-stream',
+          'Thornburgh_Richard/Richard_Thornburgh.ac3' => 'audio/ac3',
         }
       }
       it do
