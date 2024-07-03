@@ -1,13 +1,17 @@
 extension_to_mime_type_overrides:
+  # NOTE: Always use lower case keys
   'test': 'test/type'
   'mp4': 'video/mp4'
   'vtt': 'text/vtt'
   'm4v': 'video/x-m4v'
   'mts': 'video/MP2T'
+  'ac3': 'audio/ac3'
 mime_type_to_dc_type_overrides:
+  # NOTE: Always use lower case keys
   'test/type': 'Test'
   'application/mxf': 'MovingImage'
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'Text'
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'Dataset'
 mime_type_to_pcdm_type_overrides:
+  # NOTE: Always use lower case keys
   'test/type': 'Test'

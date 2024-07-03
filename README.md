@@ -50,8 +50,9 @@ BestType.configure({
 BestType.mime_type.for_file_name('myfile.custom') # 'custom/type'
 BestType.dc_type.for_file_name('myfile.custom') # 'CustomDC'
 BestType.pcdm_type.for_mime_type('custom/type') # 'CustomPCDM'
-
 ```
+
+**Note: Case-insensitive string comparisons are used when checking against file extensions and mime types.**
 
 ### Recommended Setup For Rails
 
@@ -93,7 +94,7 @@ development:
     'good/type': 'Good'
   mime_type_to_pcdm_type_overrides:
     'good/type': 'Goodly'
-    
+
 test:
   extension_to_mime_type_overrides:
     'better': 'better/type'

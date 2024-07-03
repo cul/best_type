@@ -5,23 +5,37 @@ describe BestType::Config do
   let(:config) {
     BestType::Config.new(
       extension_to_mime_type_overrides: {
-        'custom' => 'custom/type'
+        'custom' => 'custom/type',
+        'OTHER' => 'Other/Type',
       },
       mime_type_to_dc_type_overrides: {
-        'custom/type' => 'Custom'
+        'custom/type' => 'Custom',
+        'OTHER/TYPE' => 'Other',
+      },
+      mime_type_to_pcdm_type_overrides: {
+        'custom/type' => 'Custom',
+        'OTHER/TYPE' => 'Other',
       }
     )
   }
 
   context '#initialize' do
-    it "creates a new Config instance with the base configuration from internal_config_options.yml file and any provided user config values merged in" do
+    it  'creates a new Config instance with the base configuration from internal_config_options.yml '\
+        'file, merges in user config values, and downcases override keys as expected (but not override values)' do
       expect(config.extension_to_mime_type_overrides).to include({
         'test' => 'test/type',
-        'custom' => 'custom/type'
+        'custom' => 'custom/type',
+        'other' => 'Other/Type', # NOTE: They key here has been downcased
       })
       expect(config.mime_type_to_dc_type_overrides).to include({
         'test/type' => 'Test',
-        'custom/type' => 'Custom'
+        'custom/type' => 'Custom',
+        'other/type' => 'Other', # NOTE: They key here has been downcased
+      })
+      expect(config.mime_type_to_pcdm_type_overrides).to include({
+        'test/type' => 'Test',
+        'custom/type' => 'Custom',
+        'other/type' => 'Other', # NOTE: They key here has been downcased
       })
     end
   end

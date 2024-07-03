@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/MethodLength
+
 module BestType
   class Config
-
     attr_reader :extension_to_mime_type_overrides, :mime_type_to_dc_type_overrides, :mime_type_to_pcdm_type_overrides
 
     def initialize(user_config_options = {})
@@ -14,23 +18,34 @@ module BestType
       @mime_type_to_pcdm_type_overrides = internal_config_options['mime_type_to_pcdm_type_overrides'] || {}
 
       stringify_user_config_options_keys!(user_config_options)
-      add_extension_to_mime_type_overrides(user_config_options['extension_to_mime_type_overrides']) if user_config_options.key?('extension_to_mime_type_overrides')
-      add_mime_type_to_dc_type_overrides(user_config_options['mime_type_to_dc_type_overrides']) if user_config_options.key?('mime_type_to_dc_type_overrides')
-      add_mime_type_to_pcdm_type_overrides(user_config_options['mime_type_to_pcdm_type_overrides']) if user_config_options.key?('mime_type_to_pcdm_type_overrides')
+      if user_config_options.key?('extension_to_mime_type_overrides')
+        add_extension_to_mime_type_overrides(user_config_options['extension_to_mime_type_overrides'])
+      end
+      if user_config_options.key?('mime_type_to_dc_type_overrides')
+        add_mime_type_to_dc_type_overrides(user_config_options['mime_type_to_dc_type_overrides'])
+      end
+      return unless user_config_options.key?('mime_type_to_pcdm_type_overrides')
+
+      add_mime_type_to_pcdm_type_overrides(user_config_options['mime_type_to_pcdm_type_overrides'])
     end
 
     private
 
+    # Returns a new Hash with downcased keys
+    def downcase_hash_keys(hsh)
+      hsh.transform_keys(&:downcase)
+    end
+
     def add_extension_to_mime_type_overrides(overrides)
-      @extension_to_mime_type_overrides.merge!(overrides)
+      @extension_to_mime_type_overrides.merge!(downcase_hash_keys(overrides))
     end
 
     def add_mime_type_to_dc_type_overrides(overrides)
-      @mime_type_to_dc_type_overrides.merge!(overrides)
+      @mime_type_to_dc_type_overrides.merge!(downcase_hash_keys(overrides))
     end
 
     def add_mime_type_to_pcdm_type_overrides(overrides)
-      @mime_type_to_pcdm_type_overrides.merge!(overrides)
+      @mime_type_to_pcdm_type_overrides.merge!(downcase_hash_keys(overrides))
     end
 
     def stringify_user_config_options_keys!(user_config_options)
@@ -43,6 +58,5 @@ module BestType
       end
       user_config_options_keys
     end
-
   end
 end

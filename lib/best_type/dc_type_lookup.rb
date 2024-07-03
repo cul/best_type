@@ -1,19 +1,22 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/MethodLength
+
 module BestType
   class DcTypeLookup
-
     attr_reader :config
 
-    COLLECTION = 'Collection'.freeze
-    DATASET = 'Dataset'.freeze
-    EVENT = 'Event'.freeze
-    INTERACTIVE_RESOURCE = 'InteractiveResource'.freeze
-    MOVING_IMAGE = 'MovingImage'.freeze
-    PHYSICAL_OBJECT = 'PhysicalObject'.freeze
-    SERVICE = 'Service'.freeze
-    SOFTWARE = 'Software'.freeze
-    SOUND = 'Sound'.freeze
-    STILL_IMAGE = 'StillImage'.freeze
-    TEXT = 'Text'.freeze
+    COLLECTION = 'Collection'
+    DATASET = 'Dataset'
+    EVENT = 'Event'
+    INTERACTIVE_RESOURCE = 'InteractiveResource'
+    MOVING_IMAGE = 'MovingImage'
+    PHYSICAL_OBJECT = 'PhysicalObject'
+    SERVICE = 'Service'
+    SOFTWARE = 'Software'
+    SOUND = 'Sound'
+    STILL_IMAGE = 'StillImage'
+    TEXT = 'Text'
 
     # these include values that will not be derived from MIME/content types
     VALID_TYPES = [
@@ -37,10 +40,16 @@ module BestType
     end
 
     def for_file_name(file_name_or_path)
+      # Normalize format of file_name_or_path
+      file_name_or_path = file_name_or_path.downcase
+
       for_mime_type(@mime_type_lookup.for_file_name(file_name_or_path))
     end
 
     def for_mime_type(mime_type)
+      # Normalize format of mime_type
+      mime_type = mime_type.downcase
+
       # Check config overrides first
       dc_type = @config.mime_type_to_dc_type_overrides.fetch(mime_type, nil)
       return dc_type unless dc_type.nil?
@@ -50,14 +59,13 @@ module BestType
         /^video/ => MOVING_IMAGE,
         /^audio/ => SOUND,
         /^text/ => TEXT,
-        /^application\/(pdf|msword)/ => TEXT,
-        /excel|spreadsheet|xls|application\/sql/ => DATASET,
+        %r{^application/(pdf|msword)} => TEXT,
+        %r{excel|spreadsheet|xls|application/sql} => DATASET,
         /^application/ => SOFTWARE
       }
 
       dc_type = mimes_to_dc.find { |pattern, _type_val| mime_type =~ pattern }
       dc_type.nil? ? FALLBACK_DC_TYPE : dc_type.last
     end
-
   end
 end

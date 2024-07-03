@@ -1,19 +1,23 @@
+# frozen_string_literal: true
+
 require 'mime-types'
 
 module BestType
   class MimeTypeLookup
-
     attr_reader :config
 
-    FALLBACK_MIME_TYPE_VALUE = 'application/octet-stream'.freeze
+    FALLBACK_MIME_TYPE_VALUE = 'application/octet-stream'
 
     def initialize(config)
       @config = config
     end
 
     def for_file_name(file_name_or_path)
+      # Normalize format of file_name_or_path
+      file_name_or_path = file_name_or_path.downcase
+
       extension = File.extname(file_name_or_path)
-      extension = extension[1..-1] unless extension.empty?
+      extension = extension[1..] unless extension.empty?
 
       # Check config overrides first
       unless extension.empty?
@@ -25,6 +29,5 @@ module BestType
       detected_mime_types = MIME::Types.of(file_name_or_path)
       detected_mime_types.empty? ? FALLBACK_MIME_TYPE_VALUE : detected_mime_types.first.content_type
     end
-
   end
 end
